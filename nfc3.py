@@ -28,19 +28,15 @@ try:
 				buffer.append(line_content)
 		str=buffer[0]
 		id_str=str[2]+str[3]+str[4]+str[5]
-		db=MySQLdb.connect(host='172.28.101.230',user='root',passwd='root',db='scal') 
-                cursor=db.cursor()
+		db=MySQLdb.connect(host='172.28.101.230',user='root',passwd='root',db='scal')
+		cursor=db.cursor()
 		consulta="select a.id_horario from horarios a,profesor b,materia c,laboratorio d,curso e where (a.profesor_id=b.id_profesor and c.id_materia=a.materia_id and d.id_laboratorio=a.laboratorio_id and a.curso_id=e.id_curso) and b.estado='ACT' and (now() between a.inicio and a.fin) and b.tag_profesor='"+id_str+"'"
 		cursor.execute(consulta)
 		data=cursor.fetchall()
 		if(len(data) > 0):
 		    for values in data:
-		    	#query_insert="insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),'"+values[0]+"')"
- 	    	    	#cursor.execute(query_insert)
-		    	#db.commit()
-                    	print(values[0])
-		    	#print(str)
-                    GPIO.output(36,GPIO.HIGH)
+    				cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
+					GPIO.output(36,GPIO.HIGH)
                     time.sleep(1)
                     GPIO.output(36,GPIO.LOW)                    
                 else:
@@ -52,6 +48,7 @@ try:
 			time.sleep(1)
 			GPIO.output(36,GPIO.LOW)
                     #print("False")
+		db.commit()
 		cursor.close()
 		db.close()  
 		#print (id_str)
