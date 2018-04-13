@@ -29,19 +29,23 @@ try:
         id_str = str[2] + str[3] + str[4] + str[5]
         db = MySQLdb.connect(host='172.28.101.230', user='root', passwd='root', db='scal')
         cursor = db.cursor()
-        nfc2=repr(id_str)
-        nfc3=nfc2.split("'")
+        nfc2 = repr(id_str)
+        nfc3 = nfc2.split("'")
         print(nfc3[1])
-        nfc=(nfc3[1])
+        nfc = (nfc3[1])
         consulta = "select a.id_horario from horarios a,profesor b,materia c,laboratorio d,curso e where (a.profesor_id=b.id_profesor and c.id_materia=a.materia_id and d.id_laboratorio=a.laboratorio_id and a.curso_id=e.id_curso) and b.estado='ACT' and (now() between a.inicio and a.fin) and b.tag_profesor='" + nfc + "'"
         cursor.execute(consulta)
         data = cursor.fetchall()
         if (len(data) > 0): 
             for values in data:
-                cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now()," + str(values[0]) + ")")
-                GPIO.output(36, GPIO.HIGH)
-                time.sleep(1)
-                GPIO.output(36, GPIO.LOW)            
+                valor = repr(values[0])
+                valor_split = valor.split("'")
+                print(valor_split[1])
+                horario_id = (valor_split[1])
+            cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now()," + horario_id + ")")
+            GPIO.output(36, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(36, GPIO.LOW)            
     else:
         pass
         consulta_master = "select * from profesor where estado='ADM' and tag_profesor='" + id_str + "'"
