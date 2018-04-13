@@ -29,7 +29,7 @@ try:
         id_str = str[2] + str[3] + str[4] + str[5]
         db = MySQLdb.connect(host='172.28.101.230', user='root', passwd='root', db='scal')
         cursor = db.cursor()
-        nfc=str(id_str)
+        nfc=repr(id_str)
         consulta = "select a.id_horario from horarios a,profesor b,materia c,laboratorio d,curso e where (a.profesor_id=b.id_profesor and c.id_materia=a.materia_id and d.id_laboratorio=a.laboratorio_id and a.curso_id=e.id_curso) and b.estado='ACT' and (now() between a.inicio and a.fin) and b.tag_profesor='" + nfc + "'"
         cursor.execute(consulta)
         data = cursor.fetchall()
