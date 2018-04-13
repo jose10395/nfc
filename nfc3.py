@@ -35,11 +35,15 @@ try:
 		data=cursor.fetchall()
 		if(len(data) > 0):
 		    for values in data:
-    			cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
-				GPIO.output(36,GPIO.HIGH)
-				time.sleep(1)
-				GPIO.output(36,GPIO.LOW)                    
-        else:
+                            str=values
+                            #cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
+                            print(values)
+                            print(str)
+                            cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str[0]+")")
+                            GPIO.output(36,GPIO.HIGH)
+                            time.sleep(1)
+                            GPIO.output(36,GPIO.LOW)                    
+                else:
 		    consulta_master="select * from profesor where estado='ADM' and tag_profesor='"+id_str+"'"
 		    cursor.execute(consulta_master)
 		    datos=cursor.fetchall()
