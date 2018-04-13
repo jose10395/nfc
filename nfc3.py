@@ -39,7 +39,7 @@ try:
                             #print(values)
                             #print(str[0])
                             print(str(data[0]))
-                            id_strr=data
+                            id_strr=str(data[0])
                             cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),'"+id_strr+"')")
                             GPIO.output(36,GPIO.HIGH)
                             time.sleep(1)
