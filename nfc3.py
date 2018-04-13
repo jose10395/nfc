@@ -39,7 +39,8 @@ try:
                             #cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
                             print(values)
                             print(str[0])
-                            cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),'"+str[0]+"')")
+                            id_str=str[0]
+                            cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),'"+id_str+"')")
                             GPIO.output(36,GPIO.HIGH)
                             time.sleep(1)
                             GPIO.output(36,GPIO.LOW)                    
