@@ -31,6 +31,7 @@ try:
         cursor = db.cursor()
         nfc2=repr(id_str)
         nfc3=nfc2.split("'")
+        print(nfc3)
         nfc=str(nfc3[0])
         consulta = "select a.id_horario from horarios a,profesor b,materia c,laboratorio d,curso e where (a.profesor_id=b.id_profesor and c.id_materia=a.materia_id and d.id_laboratorio=a.laboratorio_id and a.curso_id=e.id_curso) and b.estado='ACT' and (now() between a.inicio and a.fin) and b.tag_profesor='" + nfc + "'"
         cursor.execute(consulta)
