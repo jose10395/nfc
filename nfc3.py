@@ -45,8 +45,8 @@ try:
 			datos=cursor.fetchall()
 			if(len(datos)>0):
     				GPIO.output(36,GPIO.HIGH)
-					time.sleep(1)
-					GPIO.output(36,GPIO.LOW)
+				time.sleep(1)
+				GPIO.output(36,GPIO.LOW)
 		db.commit()
 		cursor.close()
 		db.close()  
