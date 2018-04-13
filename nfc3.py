@@ -35,11 +35,11 @@ try:
 		data=cursor.fetchall()
 		if(len(data) > 0):
 		    for values in data:
-                            str=values[0]
+                            strA=values[0]
                             #cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
                             #print(values)
                             #print(str[0])
-                            id_strr=str[0]
+                            id_strr=strA
                             cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),'"+id_strr+"')")
                             GPIO.output(36,GPIO.HIGH)
                             time.sleep(1)
