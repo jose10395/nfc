@@ -48,7 +48,7 @@ try:
             time.sleep(1)
             GPIO.output(36, GPIO.LOW)            
     else:
-        pass
+        #pass
         consulta_master = "select * from profesor where estado='ADM' and tag_profesor='" + nfc + "'"
         cursor.execute(consulta_master)
         datos = cursor.fetchall()
