@@ -33,7 +33,7 @@ try:
 		consulta="select a.id_horario from horarios a,profesor b,materia c,laboratorio d,curso e where (a.profesor_id=b.id_profesor and c.id_materia=a.materia_id and d.id_laboratorio=a.laboratorio_id and a.curso_id=e.id_curso) and b.estado='ACT' and (now() between a.inicio and a.fin) and b.tag_profesor='"+id_str+"'"
 		cursor.execute(consulta)
 		data=cursor.fetchall()
-		if (len(data > 0)):     			
+		if (len(data) > 0):     			
 				cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
 				GPIO.output(36,GPIO.HIGH)
 				time.sleep(1)
@@ -45,8 +45,8 @@ try:
 			datos=cursor.fetchall()
 			if(len(datos)>0):
     				GPIO.output(36,GPIO.HIGH)
-				time.sleep(1)
-				GPIO.output(36,GPIO.LOW)
+			time.sleep(1)
+			GPIO.output(36,GPIO.LOW)
 		db.commit()
 		cursor.close()
 		db.close()  
