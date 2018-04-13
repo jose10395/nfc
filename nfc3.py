@@ -34,7 +34,7 @@ try:
 		cursor.execute(consulta)
 		data=cursor.fetchall()
 		if (len(data) > 0):     			
-				cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(values[0])+")")
+				cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now(),"+str(data[0])+")")
 				GPIO.output(36,GPIO.HIGH)
 				time.sleep(1)
 				GPIO.output(36,GPIO.LOW)
