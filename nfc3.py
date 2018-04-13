@@ -56,6 +56,5 @@ try:
     cursor.close()
     db.close()  
     #print (id_str)
-		
 except KeyboardInterrupt:
     pass
