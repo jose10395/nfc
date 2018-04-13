@@ -43,6 +43,7 @@ try:
                 print(valor_split[0])
                 horario_id = (valor_split[0])
             cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now()," + horario_id + ")")
+            db.commit()
             GPIO.output(36, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(36, GPIO.LOW)            
