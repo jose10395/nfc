@@ -37,26 +37,26 @@ try:
         cursor.execute(consulta)
         data = cursor.fetchall()
         if (len(data) > 0):
-		for values in data:
-			valor = repr(values[0])
-                	valor_split = valor.split("'")
-                	print(valor_split[0])
-                	horario_id = (valor_split[0])
-			#horario_id=values[0]
-            		cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now()," + str(horario_id) + ")")
-            		db.commit()
-            		GPIO.output(36, GPIO.HIGH)
-            		time.sleep(1)
-            		GPIO.output(36, GPIO.LOW)            
+            for values in data:
+                valor = repr(values[0])
+                valor_split = valor.split("'")
+                print(valor_split[0])
+                horario_id = (valor_split[0])
+                #horario_id=values[0]
+                cursor.execute("insert into registro_acceso(fecha_registro_acceso,horario_id)values(now()," + str(horario_id) + ")")
+                db.commit()
+                GPIO.output(36, GPIO.HIGH)
+                time.sleep(1)
+                GPIO.output(36, GPIO.LOW)            
     	else:
         #pass
-        	consulta_master = "select * from profesor where estado='ADM' and tag_profesor='" + nfc + "'"
-        	cursor.execute(consulta_master)
-        	datos = cursor.fetchall()
-        	if(len(datos) > 0):
-	            	GPIO.output(36, GPIO.HIGH)
-        		time.sleep(1)
-        		GPIO.output(36, GPIO.LOW)
+            consulta_master = "select * from profesor where estado='ADM' and tag_profesor='" + nfc + "'"
+            cursor.execute(consulta_master)
+            datos = cursor.fetchall()
+            if(len(datos) > 0):
+                GPIO.output(36, GPIO.HIGH)
+                time.sleep(1)
+                GPIO.output(36, GPIO.LOW)
     #db.commit()
     cursor.close()
     db.close()  
