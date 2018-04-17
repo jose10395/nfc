@@ -29,6 +29,7 @@ try:
         id_str = str[2] + str[3] + str[4] + str[5]
         db = MySQLdb.connect(host='172.28.101.230', user='root', passwd='root', db='scal')
         cursor = db.cursor()
+        
         nfc2 = repr(id_str)
         nfc3 = nfc2.split("'")
         print(nfc3[1])
